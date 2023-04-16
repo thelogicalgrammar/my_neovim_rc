@@ -1,1 +1,3 @@
-# my_neovim_rc
+# My neovim .rc
+
+Pretty self explanatory!
