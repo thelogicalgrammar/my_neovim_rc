@@ -1,5 +1,4 @@
 
-
 " disable mouse
 set mouse=
 
@@ -39,12 +38,15 @@ let g:jedi#show_call_signatures = "2"
 let g:jedi#use_splits_not_buffers = "left"
 let g:jedi#popup_on_dot = 0
 
-" add 'C' as a argument of surround plugin for python block comment
-let g:surround_{char2nr('c')} = "\"\"\"\r\"\"\""
-
 " remap space bar as mapleader
 nnoremap <SPACE> <Nop>
 let mapleader=" "
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 set breakindent
 set number relativenumber
@@ -83,5 +85,8 @@ Plugin 'github/copilot.vim'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-fugitive'
+Plugin 'nvim-lua/plenary.nvim'
+Plugin 'nvim-telescope/telescope.nvim'
+Plugin 'lukas-reineke/indent-blankline.nvim'
 call vundle#end()
 filetype plugin indent on
