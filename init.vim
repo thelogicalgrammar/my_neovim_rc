@@ -1,4 +1,17 @@
 
+" Command to run CopilotChat
+function! MyCustomFunction(...)
+    " Check if the current buffer is a scratch buffer
+    if &buftype == 'nofile'
+        " Already in a scratch buffer, just run CopilotChat
+        execute 'CopilotChat ' . join(a:000, ' ')
+    else
+        " Not in a scratch buffer, create one and run CopilotChat
+        execute 'vsplit | enew | setlocal buftype=nofile bufhidden=hide noswapfile wrap linebreak nonu | CopilotChat ' . join(a:000, ' ')
+    endif
+endfunction
+command! -nargs=* CPC call MyCustomFunction(<f-args>)
+
 " disable mouse
 set mouse=
 
@@ -53,6 +66,10 @@ set number relativenumber
 set linebreak 
 set autoindent
 set foldmethod=indent
+" Fold using treesitter
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
+
 set showcmd
 " Set tabs from 8 spaces to 4 spaces
 set tabstop=4 
@@ -71,6 +88,7 @@ nnoremap <leader>t :TagbarToggle<CR>
 set nocompatible
 filetype off
 
+" NOTE: CopilotChat plugin is also installed, manually
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'tpope/vim-surround'
@@ -85,8 +103,9 @@ Plugin 'github/copilot.vim'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-fugitive'
-Plugin 'nvim-lua/plenary.nvim'
+Plugin 'nvim-lua/plenary.nvim' " required by telescope
 Plugin 'nvim-telescope/telescope.nvim'
 Plugin 'lukas-reineke/indent-blankline.nvim'
+Plugin 'mechatroner/rainbow_csv'
 call vundle#end()
 filetype plugin indent on
